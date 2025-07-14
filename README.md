@@ -1,4 +1,4 @@
-# Spring AI Chat Application
+### SpringAI Chat
 
 1. **Clone and run:**
    ```bash
@@ -21,14 +21,12 @@
      -d '{"message": "How are you?", "conversationId": "test-123"}'
    ```
 
-## API Endpoints
+#### API Endpoints
 
 - `POST /api/chat/message` - Send message to chat conversation
 - `GET /api/chat/test` - Test message
 - `DELETE /api/chat/conversation/{id}` - Delete conversation
 - `GET /api/chat/conversation/{id}/history` - Get conversation history
 
-## Swagger UI
-
- **Interactive API Testing**: http://localhost:8888/swagger-ui/index.html
+#### Swagger UI Integrate
 
