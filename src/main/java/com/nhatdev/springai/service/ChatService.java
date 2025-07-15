@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static com.nhatdev.springai.utils.LanguageDetect.detectLanguage;
 import static com.nhatdev.springai.utils.Prompt.OLD_CONVERSATION_PROMPT;
+import static com.nhatdev.springai.utils.Prompt.SYSTEM_PROMPT;
 
 @Service
 public class ChatService {
@@ -59,6 +60,7 @@ public class ChatService {
             // send req to AI
             String aiResponse = chatClient.prompt()
                     .user(promptText)
+                    .system(SYSTEM_PROMPT)
                     .call()
                     .content();
 
