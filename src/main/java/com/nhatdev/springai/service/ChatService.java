@@ -9,14 +9,8 @@ import org.slf4j.LoggerFactory;
 import com.nhatdev.springai.dto.ChatRequest;
 import com.nhatdev.springai.dto.ChatResponse;
 
-import java.io.IOException;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static com.nhatdev.springai.utils.LanguageDetect.detectLanguage;
-import static com.nhatdev.springai.utils.Prompt.OLD_CONVERSATION_PROMPT;
-import static com.nhatdev.springai.utils.Prompt.SYSTEM_PROMPT;
 
 @Service
 public class ChatService {
@@ -38,38 +32,23 @@ public class ChatService {
      */
     public ChatResponse chat(ChatRequest request) {
         try {
-            logger.info("Processing chat request: {}", request);
-
-            // Validate input
-            if (request.getMessage() == null || request.getMessage().trim().isEmpty()) {
-                return ChatResponse.error("Message is not blank", request.getConversationId());
-            }
-
-            // Conversation ID
+            logger.info("Processing chat request for conversation: {}", request.getConversationId());
+            
+            String message = request.getMessage();
             String conversationId = request.getConversationId();
-            if (conversationId == null || conversationId.trim().isEmpty()) {
-                conversationId = UUID.randomUUID().toString();
+            
+            if (message == null || message.trim().isEmpty()) {
+                return ChatResponse.error("Message cannot be empty", conversationId);
             }
 
-            // History
-            StringBuilder history = conversationHistory.computeIfAbsent(conversationId, k -> new StringBuilder());
-            history.append("User: ").append(request.getMessage()).append("\n");
-            // prompt
-            String promptText = createPromptWithContext(history.toString(), request.getMessage());
-
-            // send req to AI
+            // Send request to AI
             String aiResponse = chatClient.prompt()
-                    .user(promptText)
-                    .system(SYSTEM_PROMPT)
+                    .user(message)
+                    .system("You are a helpful AI assistant. Please provide clear and helpful responses.")
                     .call()
                     .content();
 
-            // add res to history
-            history.append("Assistant: ").append(aiResponse).append("\n");
-
-            logger.info("Generated AI response for conversation: {}", conversationId);
-            logger.info("Conversation history:\n {}", history.toString());
-
+            logger.info("AI response received successfully");
             return ChatResponse.success(aiResponse, conversationId);
 
         } catch (Exception e) {
@@ -79,47 +58,5 @@ public class ChatService {
         }
     }
 
-    /**
-     * Prompt with old conversation context
-     */
-    private String createPromptWithContext(String conversationHistory, String currentMessage) throws IOException {
-        if (conversationHistory.trim().isEmpty()) {
-            return currentMessage;
-        }
 
-        String language = detectLanguage(currentMessage);
-
-        logger.info("Detected language: {}", language);
-
-        return String.format(OLD_CONVERSATION_PROMPT + ". Trả lời bằng ngôn ngữ " + language + ".", conversationHistory, currentMessage);
-    }
-
-    /**
-     * Clear history
-     */
-    public void clearConversation(String conversationId) {
-        if (conversationId != null) {
-            conversationHistory.remove(conversationId);
-            logger.info("Cleared conversation history for: {}", conversationId);
-        }
-    }
-
-    /**
-     * Get conversation history
-     */
-    public String getConversationHistory(String conversationId) {
-        if (conversationId == null) {
-            return "";
-        }
-
-        StringBuilder history = conversationHistory.get(conversationId);
-        return history != null ? history.toString() : "";
-    }
-
-    /**
-     * Check if exists
-     */
-    public boolean conversationExists(String conversationId) {
-        return conversationId == null || !conversationHistory.containsKey(conversationId);
-    }
 }

@@ -1,0 +1,55 @@
+### Spring AI Structured Output Converter Demo
+### Base URL: http://localhost:8888
+
+### 1. Info - Thông tin về Structured Output Converter
+GET http://localhost:8888/api/structured-output/info
+
+### 2. BeanOutputConverter Demo - Actor Films (Tom Hanks)
+GET http://localhost:8888/api/structured-output/actor-films?actor=Tom Hanks
+
+### 3. BeanOutputConverter Demo - Actor Films (Leonardo DiCaprio)
+GET http://localhost:8888/api/structured-output/actor-films?actor=Leonardo DiCaprio
+
+### 4. BeanOutputConverter Demo - Book Recommendations (Science Fiction)
+GET http://localhost:8888/api/structured-output/book-recommendations?genre=science fiction
+
+### 5. BeanOutputConverter Demo - Book Recommendations (Mystery)
+GET http://localhost:8888/api/structured-output/book-recommendations?genre=mystery
+
+### 6. BeanOutputConverter Demo - Book Recommendations (Fantasy)
+GET http://localhost:8888/api/structured-output/book-recommendations?genre=KotlinProgramming
+
+### 7. ListOutputConverter Demo - Countries in Asia
+GET http://localhost:8888/api/structured-output/countries?continent=Asia
+
+### 8. ListOutputConverter Demo - Countries in Europe
+GET http://localhost:8888/api/structured-output/countries?continent=Europe
+
+### 9. ListOutputConverter Demo - Countries in Africa
+GET http://localhost:8888/api/structured-output/countries?continent=Africa
+
+### 10. MapOutputConverter Demo - Capital Info (Japan)
+GET http://localhost:8888/api/structured-output/capital-info?country=Japan
+
+### 11. MapOutputConverter Demo - Capital Info (France)
+GET http://localhost:8888/api/structured-output/capital-info?country=France
+
+### 12. MapOutputConverter Demo - Capital Info (Vietnam)
+GET http://localhost:8888/api/structured-output/capital-info?country=Vietnam
+
+### 13. Demo All Converters - Comprehensive Test
+GET http://localhost:8888/api/structured-output/demo-all
+
+### 14. BeanOutputConverter Demo - Actor Films (Will Smith)
+GET http://localhost:8888/api/structured-output/actor-films?actor=Will Smith
+
+### 15. BeanOutputConverter Demo - Book Recommendations (Historical Fiction)
+GET http://localhost:8888/api/structured-output/book-recommendations?genre=historical fiction
+
+### 16. ListOutputConverter Demo - Countries in South America
+GET http://localhost:8888/api/structured-output/countries?continent=South America
+
+### 17. MapOutputConverter Demo - Capital Info (Brazil)
+GET http://localhost:8888/api/structured-output/capital-info?country=Brazil
+
+### 

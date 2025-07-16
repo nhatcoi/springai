@@ -1,33 +1,26 @@
 package com.nhatdev.springai.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 
 /**
  * DTO req
  */
-@Schema(description = "Response object từ chat API")
 public class ChatResponse {
     
     @JsonProperty("message")
-    @Schema(description = "Response from AI", example = "Hi! I'm fine, Thanks for asking.")
     private String message;
     
     @JsonProperty("conversationId")
-    @Schema(description = "Conservation ID", example = "conv-123")
     private String conversationId;
     
     @JsonProperty("timestamp")
-    @Schema(description = "Time to create res", example = "2025-07-10T10:30:00")
     private LocalDateTime timestamp;
     
     @JsonProperty("status")
-    @Schema(description = "Response status", example = "success", allowableValues = {"success", "error"})
     private String status;
     
     @JsonProperty("error")
-    @Schema(description = "Error message")
     private String error;
     
     public ChatResponse() {
