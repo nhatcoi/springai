@@ -6,7 +6,7 @@ spring:
     name: springai
   ai:
     openai:
-      api-key: ${API_KEY}
+      api-key: AIzaSyC33eac44HAany3NfkIDgh89JBwRd8vi9U
       chat:
         base-url: https://generativelanguage.googleapis.com
         completions-path: /v1beta/openai/chat/completions

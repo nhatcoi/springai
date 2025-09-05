@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "springai-chat-api",
+		"name": "SpringAI Chat API",
+		"description": "Postman collection for SpringAI Chat API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"message\": \"Hello! How are you today?\",\n    \"conversationId\": \"conv-123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/message",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"message"
+							]
+						},
+						"description": "Send a message to the AI and get a response. The conversationId is optional - if not provided, a new conversation will be started."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"message\": \"Hello! How are you today?\",\n    \"conversationId\": \"conv-123\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/chat/message",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"chat",
+										"message"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Hello! I'm JackieAI (JAI), and I'm doing great! Thanks for asking. How can I help you today?\",\n    \"conversationId\": \"conv-123\",\n    \"timestamp\": \"2025-01-27T10:30:00\",\n    \"status\": \"success\",\n    \"error\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Test Chat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/test?message=Hello!",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"test"
+							],
+							"query": [
+								{
+									"key": "message",
+									"value": "Hello!",
+									"description": "Test message"
+								}
+							]
+						},
+						"description": "Quick test endpoint for the chat functionality with a sample message."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/chat/test?message=Hello!",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"chat",
+										"test"
+									],
+									"query": [
+										{
+											"key": "message",
+											"value": "Hello!"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Hello! I'm JackieAI (JAI), nice to meet you!\",\n    \"conversationId\": \"generated-uuid\",\n    \"timestamp\": \"2025-01-27T10:30:00\",\n    \"status\": \"success\",\n    \"error\": null\n}"
+						}
+					]
+				}
+			],
+			"description": "Chat endpoints for interacting with the AI assistant"
+		},
+		{
+			"name": "Conversation Management",
+			"item": [
+				{
+					"name": "Get Conversation History",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/conversation/{{conversationId}}/history",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"conversation",
+								"{{conversationId}}",
+								"history"
+							]
+						},
+						"description": "Get the conversation history for a specific conversation ID."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/chat/conversation/conv-123/history",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"chat",
+										"conversation",
+										"conv-123",
+										"history"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								}
+							],
+							"cookie": [],
+							"body": "User: Hello! How are you today?\nAssistant: Hello! I'm JackieAI (JAI), and I'm doing great! Thanks for asking. How can I help you today?\nUser: What's the weather like?\nAssistant: I don't have access to real-time weather data, but I'd be happy to help you find weather information! You can check your local weather app or visit a weather website like Weather.com or your local meteorological service."
+						}
+					]
+				},
+				{
+					"name": "Delete Conversation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/chat/conversation/{{conversationId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"chat",
+								"conversation",
+								"{{conversationId}}"
+							]
+						},
+						"description": "Delete/clear the conversation history for a specific conversation ID."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/chat/conversation/conv-123",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"chat",
+										"conversation",
+										"conv-123"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								}
+							],
+							"cookie": [],
+							"body": "Deleted conversation successfully"
+						}
+					]
+				}
+			],
+			"description": "Endpoints for managing conversation history and lifecycle"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8888",
+			"type": "string"
+		},
+		{
+			"key": "conversationId",
+			"value": "conv-123",
+			"type": "string"
+		}
+	]
+}
